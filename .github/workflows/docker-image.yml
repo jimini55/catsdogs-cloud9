@@ -28,7 +28,7 @@ jobs:
     - name: Build the Docker image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: sohel_images
+        ECR_REPOSITORY: docker_ecr
         IMAGE_TAG: v0.1
       run: |
         cd cats/
