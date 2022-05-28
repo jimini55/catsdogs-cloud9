@@ -49,7 +49,5 @@ jobs:
           docker ps
           echo " sleep 10 seconds for container to run"
           sleep 10
-          # curl the local host to check website content
-          curl localhost -vvv
           # Push the docker image to ECR repository
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
