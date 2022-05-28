@@ -39,7 +39,7 @@ jobs:
           
       # Runs a set of commands
         run: |
-          cd catsdogs-cloud9/cats/
+          cd cats/
           ls -ltra
           # Build the docker image 
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
