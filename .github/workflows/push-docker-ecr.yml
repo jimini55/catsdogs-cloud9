@@ -30,6 +30,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: vidhiclo835
+        IMAGE_TAG: v1.1
         
       run: |
         cd cats/
