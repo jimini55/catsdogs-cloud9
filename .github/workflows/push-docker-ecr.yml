@@ -30,28 +30,29 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: vidhiclo835
-        IMAGE_TAG: v1.1
+        IMAGE_TAG1: v1.1
+        IMAGE_TAG2: v2.1
         
       run: |
         cd cats/
         ls -ltra
-        # Docker build
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        # Docker build cat
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG1 .
         # Unit test
-        docker run -d -p 80:80 --name nodeapp $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker run -d -p 80:80 --name nodeapp $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG1
         docker ps
         echo "Pause for 10 seconds to let container start"
         sleep 10
         curl localhost -vvv
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG1
         cd ../dogs/
         ls -ltra
-        # Docker build
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        # Docker build dog
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG2 .
         # Unit test
-        docker run -d -p 80:80 --name nodeapp $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker run -d -p 80:80 --name nodeapp $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG2
         docker ps
         echo "Pause for 10 seconds to let container start"
         sleep 10
         curl localhost -vvv
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG2
