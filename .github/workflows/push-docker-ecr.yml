@@ -47,7 +47,7 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG1
         cd ../dogs/
         ls -ltra
-        # Docker build dog
+        # Docker build dogs
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG2 .
         # Unit test
         docker run -d --name nodeappdog $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG2
