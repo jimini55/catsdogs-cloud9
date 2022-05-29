@@ -39,7 +39,7 @@ jobs:
         # Docker build cat
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG1 .
         # Unit test
-        docker run -d -p 80:80 --name nodeapp $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG1
+        docker run -d -p 80:80 --name nodeappcat $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG1
         docker ps
         echo "Pause for 10 seconds to let container start"
         sleep 10
@@ -50,7 +50,7 @@ jobs:
         # Docker build dog
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG2 .
         # Unit test
-        docker run -d -p 80:80 --name nodeapp $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG2
+        docker run -d -p 80:80 --name nodeappdog $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG2
         docker ps
         echo "Pause for 10 seconds to let container start"
         sleep 10
