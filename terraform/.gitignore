@@ -2,5 +2,5 @@
 .terraform.lock.hcl
 *.pub
 linux_key
-.tfstate
-.tfstate.*
+*.tfstate
+*.tfstate.*
