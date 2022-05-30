@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Deployto ECR
+name: Deploy to ECR
 
 # Controls when the workflow will run
 on:
