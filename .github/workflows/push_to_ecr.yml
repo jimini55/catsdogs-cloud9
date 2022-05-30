@@ -45,7 +45,7 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           # Run the conatainer to test
           docker run -d -p 80:8080 --name clo835-assignment1 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          # list the containers
+          # list all the containers
           docker ps
           echo " sleep 10 seconds for container to run"
           sleep 10
