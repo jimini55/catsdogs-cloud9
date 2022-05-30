@@ -46,7 +46,7 @@ jobs:
           # Build the docker image 
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           # Run the container to test
-          docker run -d -p 8080:80 --name clo835-assignment1 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker run -d -p 8080:80 --name clo835-assignment1-cats $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           # list all the containers
           docker ps
           echo " sleep 10 seconds for container to run"
@@ -67,7 +67,7 @@ jobs:
           # Build the docker image 
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           # Run the container to test
-          docker run -d -p 8081:80 --name clo835-assignment1 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker run -d -p 8081:80 --name clo835-assignment1-dogs $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           # list all the containers
           docker ps
           echo " sleep 10 seconds for container to run"
