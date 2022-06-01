@@ -36,8 +36,8 @@ jobs:
       - name: Build,test, tag and push image to Amazon ECR
         env: 
           ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
-          ECR_REPOSITORY: clo835-assignment1-cats
-          IMAGE_TAG: v0.1
+          ECR_REPOSITORY: clo835-assignment1
+          IMAGE_TAG: catsv0.1
           
       # Runs a set of commands
         run: |
@@ -57,8 +57,8 @@ jobs:
       - name: Build,test, tag and push image to Amazon ECR
         env: 
           ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
-          ECR_REPOSITORY: clo835-assignment1-dogs
-          IMAGE_TAG: v0.1
+          ECR_REPOSITORY: clo835-assignment1
+          IMAGE_TAG: dogsv0.1
           
       # Runs a set of commands
         run: |
