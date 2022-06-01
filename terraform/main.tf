@@ -31,8 +31,9 @@ resource "aws_default_subnet" "default" {
 resource "aws_instance" "linux_vm" {
   ami                    = data.aws_ami.ami-amzn2.id
   key_name               = aws_key_pair.web_key.key_name
-  instance_type          = "t2.micro"
+  instance_type          = "t3.small"
   vpc_security_group_ids = [aws_security_group.linux_sg.id]
+  user_data = "${file("docker.sh")}"
   tags = {
     Name = "LinuxServer-EC2"
     }
@@ -45,8 +46,15 @@ resource "aws_security_group" "linux_sg" {
 
   ingress {
     description      = "Http"
-    from_port        = 80
-    to_port          = 80
+    from_port        = 8080
+    to_port          = 8080
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+   ingress {
+    description      = "Http"
+    from_port        = 8081
+    to_port          = 8081
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
   }
@@ -72,4 +80,9 @@ resource "aws_security_group" "linux_sg" {
 resource "aws_key_pair" "web_key" {
   key_name   = "linux_key"
   public_key = file("linux_key.pub")
+}
+
+resource "aws_ecr_repository" "clo835-assignment1" {
+  name                 = "clo835-assignment1"
+  image_tag_mutability = "MUTABLE"
 }
