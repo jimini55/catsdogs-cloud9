@@ -15,7 +15,7 @@ data "aws_ami" "latest_amazon_linux" {
 
 # Data source for availability zones in us-east-1
 data "aws_availability_zones" "available" {
-  state = "available"
+  state = "available" 
 }
 
 # Data block to retrieve the default VPC id
@@ -117,7 +117,7 @@ resource "aws_security_group" "my_sg" {
 }
 
 resource "aws_ecr_repository" "ecr" {
-  name                 = "clo835-assignment-1"
+  name                 = "clo835-${local.name_prefix}"
   image_tag_mutability = "MUTABLE"
 
   tags = merge(local.default_tags,
