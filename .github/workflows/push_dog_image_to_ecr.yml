@@ -32,7 +32,7 @@ jobs:
         ECR_REPOSITORY: clo835-week3
         IMAGE_TAG: dogs
       run: |
-        cd cats/
+        cd dogs/
         ls -ltra
         # Docker build
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
