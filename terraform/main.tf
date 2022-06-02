@@ -73,3 +73,9 @@ resource "aws_key_pair" "web_key" {
   key_name   = "linux_key"
   public_key = file("linux_key.pub")
 }
+
+
+resource "aws_ecr_repository" "clo835-assignment1" {
+  name                 = "clo835-assignment1"
+  image_tag_mutability = "MUTABLE"
+} 
