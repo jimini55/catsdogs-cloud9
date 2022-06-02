@@ -32,7 +32,7 @@ jobs:
         ECR_REPOSITORY: clo835-week3-nbb
         IMAGE_TAG: v0.1
       run: |
-        cd Chapter02/kubia/
+        cd cats
         ls -ltra
         # Docker build
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
