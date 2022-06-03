@@ -29,9 +29,9 @@ jobs:
     - name: Build, test, tag, and push image to Amazon ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: clo835-assignment1
-        IMAGE_TAG1: v1.1
-        IMAGE_TAG2: v2.2
+        ECR_REPOSITORY: clo835-assignment1-cat-dog
+        IMAGE_TAG1: p1.1
+        IMAGE_TAG2: p2.2
         
       run: |
         cd cats/
@@ -39,7 +39,7 @@ jobs:
         # Docker build cat
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG1 .
         # Unit Test
-        docker run -d -p 80:80 --name nodeappcat $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG1
+        docker run -d -p 80:80 --name appcat $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG1
         docker ps
         echo "Pause for 10 seconds to let container start"
         sleep 10
@@ -50,7 +50,7 @@ jobs:
         # Docker build dogs
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG2 .
         # Unit test
-        docker run -d --name nodeappdog $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG2
+        docker run -d --name appdog $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG2
         docker ps
         echo "Pause for 10 seconds to let container start"
         sleep 10
