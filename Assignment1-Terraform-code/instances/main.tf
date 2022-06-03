@@ -15,7 +15,7 @@ data "aws_ami" "latest_amazon_linux" {
 
 # Data source for availability zones in us-east-1
 data "aws_availability_zones" "available" {
-  state = "available" 
+  state = "available"
 }
 
 # Data block to retrieve the default VPC id
@@ -43,6 +43,7 @@ resource "aws_instance" "my_amazon" {
   vpc_security_group_ids      = [aws_security_group.my_sg.id]
   associate_public_ip_address = true
   iam_instance_profile        = "LabInstanceProfile"
+  user_data                   = file("${path.module}/install_docker.sh")
   lifecycle {
     create_before_destroy = true
   }
