@@ -27,13 +27,14 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+        # Declaration of AWS Secrets
         env: 
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
           AWS_SESSION_TOKEN: ${{secrets.AWS_SESSION_TOKEN}}
           AWS_REGION: us-east-1
           
-      - name: Build,test, tag and push image to Amazon ECR
+      - name: Build, Test, Tag and push cats image to Amazon ECR
         env: 
           ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
           ECR_REPOSITORY: clo835-assignment1
@@ -54,7 +55,7 @@ jobs:
           # Push the docker image to ECR repository
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           
-      - name: Build,test, tag and push image to Amazon ECR
+      - name: Build, Test, Tag and push dogs image to Amazon ECR
         env: 
           ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
           ECR_REPOSITORY: clo835-assignment1
