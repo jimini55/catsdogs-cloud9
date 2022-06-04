@@ -41,7 +41,7 @@ resource "aws_instance" "deep_vm" {
 
 #create security_group
 resource "aws_security_group" "deep_sg" {
-  name        = "allow_http_connection"
+  name        = "allow_http_connections"
   description = "Allow http inbound traffic"
   vpc_id      = data.aws_vpc.default.id
 
@@ -89,8 +89,8 @@ resource "aws_security_group" "deep_sg" {
 
 # Adding SSH key to Amazon EC2
 resource "aws_key_pair" "web_key" {
-  key_name   = "deep_key"
-  public_key = file("deep_key.pub")
+  key_name   = "deep1_key"
+  public_key = file("deep1_key.pub")
 }
 
 #create ECR
