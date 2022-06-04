@@ -1,29 +1,24 @@
-# This is a basic workflow to help you get started with Actions
 
 name: Deploy to ECR
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ master ]
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  
   build:
-    # The type of runner that the job will run on
+   
     name: Build Image
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+   
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+   
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
+   
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
@@ -39,19 +34,15 @@ jobs:
           ECR_REPOSITORY: assignment1
           IMAGE_TAG: catsv0.1
           
-      # Runs a set of commands
         run: |
           cd cats/
           ls -ltra
-          # Build the docker image 
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          # Run the container to test
           docker run -d -p 8080:80 --name assignment1-cats $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          # list all the containers
           docker ps
           echo " sleep 10 seconds for container to run"
           sleep 10
-          # Push the docker image to ECR repository
+         
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           
       - name: Build,test, tag and push image to Amazon ECR
@@ -60,7 +51,7 @@ jobs:
           ECR_REPOSITORY: assignment1
           IMAGE_TAG: dogsv0.1
           
-      # Runs a set of commands
+   
         run: |
           cd dogs/
           ls -ltra
