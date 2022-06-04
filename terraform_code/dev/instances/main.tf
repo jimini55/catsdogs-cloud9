@@ -103,8 +103,8 @@ resource "aws_security_group" "my_sg" {
   }
   ingress {
     description = "SSH from everywhere"
-    from_port   = 80
-    to_port     = 80
+    from_port   = 22
+    to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
     #  ipv6_cidr_blocks = ["::/0"]
@@ -124,15 +124,6 @@ resource "aws_security_group" "my_sg" {
   )
 }
 
-# # Elastic IP
-# resource "aws_eip" "static_eip" {
-#   instance = aws_instance.my_amazon.id
-#   tags = merge(local.default_tags,
-#     {
-#       "Name" = "${local.name_prefix}-eip"
-#     }
-#   )
-# }
 
 # creating the resource "aws_ecr_repository" to store the container registery
 resource "aws_ecr_repository" "docker_registery" {
