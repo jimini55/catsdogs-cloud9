@@ -30,7 +30,7 @@ resource "aws_default_subnet" "default" {
 # Create Amazon Linux EC2 instances in a default VPC
 resource "aws_instance" "linux_vm" {
   ami                    = data.aws_ami.ami-amzn2.id
-  key_name               = aws_key_pair.web_key.key_name
+  key_name               = aws_key_pair.key_pair.key_name
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.linux_sg.id]
   user_data = "${file("docker.sh")}"
@@ -82,7 +82,7 @@ resource "aws_key_pair" "key_pair" {
   public_key = file("key_pair.pub")
 }
 
-resource "aws_ecr_repository" "assignment1-835" {
-  name                 = "assignment1-835"
+resource "aws_ecr_repository" "assignment" {
+  name                 = "assignment"
   image_tag_mutability = "MUTABLE"
 }
