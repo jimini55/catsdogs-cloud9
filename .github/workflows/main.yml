@@ -38,7 +38,7 @@ jobs:
         env: 
           ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
           ECR_REPOSITORY: npks
-          IMAGE_TAG: cat
+          IMAGE_TAG: cats
           
       # Runs a set of commands
         run: |
