@@ -1,4 +1,4 @@
-name: Deployment ECR
+name: Deployment to ECR
 
 # Workflow execution ECR
 on:
