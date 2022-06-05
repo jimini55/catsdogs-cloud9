@@ -1,6 +1,6 @@
 name: Deployment ECR
 
-# Workflow execution
+# Workflow execution ECR
 on:
   # Triggers the workflow
   push:
