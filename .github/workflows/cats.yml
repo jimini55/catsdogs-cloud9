@@ -1,5 +1,5 @@
 name: Deploy to ECR
-#Testing for deployment
+#Testing for deployment Phase
 on: 
   pull_request:
     branches: [ master ]
