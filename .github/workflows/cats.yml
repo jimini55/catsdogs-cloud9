@@ -1,7 +1,7 @@
 name: Deploy to ECR
 #Testing for deployment Phase
 on: 
-  merge:
+  push:
     branches: [ master ]
 
 jobs:
