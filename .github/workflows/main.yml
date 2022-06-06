@@ -41,6 +41,7 @@ jobs:
         docker ps
         echo "Pause for 10 seconds to let container start"
         sleep 10
+        curl localhost:8080
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         
     - name: Build, test, tag, and push image to Amazon ECR
@@ -58,5 +59,6 @@ jobs:
         docker ps
         echo "Pause for 10 seconds to let container start"
         sleep 10
+        curl localhost:8081
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         
