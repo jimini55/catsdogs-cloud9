@@ -38,7 +38,7 @@ jobs:
         env: 
           ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
           ECR_REPOSITORY: dock
-          IMAGE_TAG: cats
+          IMAGE_TAG: catsv0.1
           
       # Runs a set of commands
         run: |
@@ -59,7 +59,7 @@ jobs:
         env: 
           ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
           ECR_REPOSITORY: dock
-          IMAGE_TAG: dogs
+          IMAGE_TAG: dogsv0.1
           
       # Runs a set of commands
         run: |
@@ -72,6 +72,9 @@ jobs:
           # list all the containers
           docker ps
           echo " sleep 10 seconds for container to run"
+          sleep 10
+          # Push the docker image to ECR repository
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG 
           sleep 10
           # Push the docker image to ECR repository
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG  
