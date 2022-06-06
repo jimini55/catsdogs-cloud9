@@ -30,7 +30,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: romiya-assignment1
-        IMAGE_TAG: v0.1
+        IMAGE_TAG: catver2
       run: |
         cd cats/
         ls -ltra
@@ -48,7 +48,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: romiya-assignment1
-        IMAGE_TAG: v0.1
+        IMAGE_TAG: dogver2
       run: |
         cd dogs/
         ls -ltra
