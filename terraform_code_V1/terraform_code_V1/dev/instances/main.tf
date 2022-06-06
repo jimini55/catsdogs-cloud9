@@ -180,11 +180,21 @@ ingress {
 # }
 
 # ECR
-resource "aws_ecr_repository" "V1.0" {
-  name                 = "V1.0"
+resource "aws_ecr_repository" "mdsouza24" {
+  name                 = "835"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
     scan_on_push = true
   }
+}
+
+# Elastic IP
+resource "aws_eip" "static_eip" {
+  instance = aws_instance.my_amazon.id
+  tags = merge(local.default_tags,
+    {
+      "Name" = "${local.name_prefix}-eip"
+    }
+  )
 }
