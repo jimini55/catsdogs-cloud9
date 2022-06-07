@@ -1,0 +1,58 @@
+name: Docker images form Docker to AWS ECR
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Image
+    runs-on: ubuntu-latest
+
+    
+    steps:
+    - uses: actions/checkout@v3     
+    - name: Login Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+       
+      env: 
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          AWS_SESSION_TOKEN: ${{secrets.AWS_SESSION_TOKEN}}
+          AWS_REGION: us-east-1
+          
+
+    - name: Trigger for pushing Dog docker image to Amazon ECR
+      env:
+        ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
+        ECR_REPOSITORY: ass-1
+        IMAGE_TAG: Dog
+      run: |
+        cd dogs/
+        ls -ltra
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker run -d -p 8081:80 --name Dogs $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker ps
+        echo "Initializing Dogs container"
+        sleep 10
+        curl localhost:8081 -v
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+#####################        
+    - name: Trigger for pushing Cat docker image to Amazon ECR
+      env:
+        ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
+        ECR_REPOSITORY: ass-1
+        IMAGE_TAG: Cat
+        
+      run: |
+        cd cats/
+        ls -ltra
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker run -d -p 8080:80 --name Cats $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker ps
+        echo "Initializing Cats container"
+        sleep 10
+        curl localhost:8080 -vv
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
