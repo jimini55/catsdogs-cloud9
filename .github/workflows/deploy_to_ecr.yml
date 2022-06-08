@@ -1,0 +1,64 @@
+name: Deploy to ECR
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    name: Build Image
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - name: Login to ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+        env: 
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          AWS_SESSION_TOKEN: ${{secrets.AWS_SESSION_TOKEN}}
+          AWS_REGION: us-east-1
+          
+      - name: Build,test, tag and push image to Amazon ECR
+        env: 
+          ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
+          ECR_REPOSITORY: docker
+          IMAGE_TAG: catsv1
+          
+      # Runs commands for cats container
+        run: |
+          cd cats/
+          ls -ltra
+          # Build the docker image 
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          # Run the container to test
+          docker run -d -p 8080:80 --name docker-cats $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          # list all the containers
+          docker ps
+          echo " sleep 10 seconds for container to run"
+          sleep 10
+          # Push the docker image to ECR repository
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          
+      - name: Build,test, tag and push image to Amazon ECR
+        env: 
+          ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
+          ECR_REPOSITORY: docker
+          IMAGE_TAG: dogsv1
+          
+      # Runs commands for dogs container
+        run: |
+          cd dogs/
+          ls -ltra
+          # Build the docker image 
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          # Run the container to test
+          docker run -d -p 8081:80 --name docker-dogs $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          # list all the containers
+          docker ps
+          echo " sleep 10 seconds for container to run"
+          sleep 10
+          # Push the docker image to ECR repository
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG    
