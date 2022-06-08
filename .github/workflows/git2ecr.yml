@@ -1,4 +1,4 @@
-name: Docker images form Docker to AWS ECR
+name: Docker images form Docker to AWS ECR- Jal Sule.
 
 on:
   push:
