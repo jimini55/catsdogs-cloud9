@@ -29,8 +29,8 @@ jobs:
     - name: Build, test, tag, and push image to Amazon ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: clo835-assignment-1-dev
-        IMAGE_TAG: cats
+        ECR_REPOSITORY: clo835-assignmnet2-cats
+        IMAGE_TAG: catsv1
       run: |
         cd cats/
         ls -ltra
