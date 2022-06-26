@@ -77,8 +77,6 @@ resource "aws_security_group" "my_sg" {
   name        = "allow_ssh"
   description = "Allow SSH inbound traffic"
   vpc_id      = data.aws_vpc.default.id
-
-
   ingress {
     description = "Http"
     from_port   = 8080
