@@ -6,7 +6,7 @@ on:
   # Triggers the workflow on push request events but only for the master branch on dogs directory
   push:
     branches:
-      - master
+      - dev
     paths:
       - dogs/*  
   # Allows you to run this workflow manually from the Actions tab
