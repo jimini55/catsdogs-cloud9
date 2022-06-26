@@ -60,4 +60,4 @@ jobs:
           echo " sleep 10 seconds for container to run"
           sleep 10
           # Push the docker image to ECR repository
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_T
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
