@@ -39,7 +39,7 @@ jobs:
                 #Variable declaration for image version     
       - name: Seting up IMAGE_TAG variable
         id: version
-        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 1)
+        run: echo ::set-output name=VERSION::$(echo GITHUB_RUN_NUMBER )
     
       - name: Build, Test, Tag and push cats image to Amazon ECR
         env: 
