@@ -1,7 +1,7 @@
 
 
 #----------------------------------------------------------
-# ACS730 - Week 3 - Terraform Introduction
+# ACS730 - Assignment2 - Terraform Introduction
 #
 # Build EC2 Instances
 #
@@ -51,6 +51,7 @@ resource "aws_instance" "my_amazon" {
   instance_type          = lookup(var.instance_type, var.env)
   key_name               = aws_key_pair.my_key.key_name
   vpc_security_group_ids = [aws_security_group.my_sg.id]
+  user_data              = file("Docker.sh")
   #associate_public_ip_address = true
 
   lifecycle {
@@ -77,46 +78,34 @@ resource "aws_security_group" "my_sg" {
   description = "Allow SSH inbound traffic"
   vpc_id      = data.aws_vpc.default.id
 
+
   ingress {
-    description = "SSH from everywhere"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-    #  ipv6_cidr_blocks = ["::/0"]
-  }
-  ingress {
-    description = "http from everywhere"
+    description = "Http"
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-    # ipv6_cidr_blocks = ["::/0"]
   }
   ingress {
-    description = "http from everywhere"
-    from_port   = 8081
-    to_port     = 8081
+    description = "Http"
+    from_port   = 30001
+    to_port     = 30001
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-    # ipv6_cidr_blocks = ["::/0"]
   }
   ingress {
-    description = "SSH from everywhere"
+    description = "ssh"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-    #  ipv6_cidr_blocks = ["::/0"]
   }
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
-
   tags = merge(local.default_tags,
     {
       "Name" = "${local.name_prefix}-sg"
@@ -126,7 +115,13 @@ resource "aws_security_group" "my_sg" {
 
 
 # creating the resource "aws_ecr_repository" to store the container registery
-resource "aws_ecr_repository" "docker_registery" {
-  name                 = "docker"
+resource "aws_ecr_repository" "docker_registery_cats" {
+  name                 = "cats"
+  image_tag_mutability = "MUTABLE"
+}
+
+# creating the resource "aws_ecr_repository" to store the container registery
+resource "aws_ecr_repository" "docker_registery_dogs" {
+  name                 = "dogs"
   image_tag_mutability = "MUTABLE"
 }
