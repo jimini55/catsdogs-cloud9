@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+  labels:
+    app: flask-app
+    component: greeting
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: flask-app
+      app.kubernetes.io/component: greeting
+  template:
+    metadata:
+      labels:
+        app: flask-app
+        component: greeting
+    spec:
+      containers:
+      - name: flask-app
+        image: clo835_flask_app
+        ports:
+        - containerPort: 8080
