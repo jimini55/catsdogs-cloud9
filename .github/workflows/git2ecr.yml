@@ -28,7 +28,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
         ECR_REPOSITORY: ass2_ecr
-        IMAGE_TAG: DogV1.0
+        IMAGE_TAG: Dogv1.0
       run: |
         cd dogs/
         ls -ltra
@@ -44,7 +44,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
         ECR_REPOSITORY: ass2_ecr
-        IMAGE_TAG: CatV1.0
+        IMAGE_TAG: Catv1.0
         
       run: |
         cd cats/
