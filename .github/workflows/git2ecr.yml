@@ -27,8 +27,8 @@ jobs:
     - name: Trigger for pushing Dog docker image to Amazon ECR
       env:
         ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
-        ECR_REPOSITORY: ass-1
-        IMAGE_TAG: Re_Dog
+        ECR_REPOSITORY: ass2_ecr
+        IMAGE_TAG: DogV1.0
       run: |
         cd dogs/
         ls -ltra
@@ -43,8 +43,8 @@ jobs:
     - name: Trigger for pushing Cat docker image to Amazon ECR
       env:
         ECR_REGISTRY: ${{steps.login-ecr.outputs.registry}}
-        ECR_REPOSITORY: ass-1
-        IMAGE_TAG: Re_Cat
+        ECR_REPOSITORY: ass2_ecr
+        IMAGE_TAG: CatV1.0
         
       run: |
         cd cats/
