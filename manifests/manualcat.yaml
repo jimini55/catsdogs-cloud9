@@ -1,0 +1,29 @@
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   labels:
+#     run: kubia
+#   name: kubia
+# spec:
+#   containers:
+#   - image: luksa/kubia
+#     name: kubia
+#     resources: {}
+#   dnsPolicy: ClusterFirst
+#   restartPolicy: Always
+  
+  apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: cats
+  name: cats
+spec:
+  containers:
+    - image: 685327363182.dkr.ecr.us-east-1.amazonaws.com/cats:v-master
+    name: cats
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
