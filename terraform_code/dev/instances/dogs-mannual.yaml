@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dogs
+  namespace: dogs
+  labels:
+    app: dogs
+spec:
+  containers:
+  - image: 331023838533.dkr.ecr.us-east-1.amazonaws.com/cats-ecr:latest
+    name: dogs
+    ports:
+    - containerPort: 80

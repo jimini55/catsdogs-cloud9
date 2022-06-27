@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cats
+  namespace: cats
+  labels:
+    app: cats
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: cats
+  template:
+    metadata:
+      labels:
+        name: cats
+    spec:
+      containers:
+      - name: cats
+        image: 858011229774.dkr.ecr.us-east-1.amazonaws.com/cats:v-6
+        ports:
+        - containerPort: 80
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always  
