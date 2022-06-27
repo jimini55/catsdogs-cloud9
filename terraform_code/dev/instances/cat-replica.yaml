@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: cats
+  labels:
+    app.kubernetes.io/name: cats
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cats
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: cats
+    spec:
+      containers:
+      - name: cats
+        image: 858011229774.dkr.ecr.us-east-1.amazonaws.com/cats:v-6
+        ports:
+        - containerPort: 80
+        
